@@ -1,8 +1,7 @@
-var VIMIC = (function(engine, renderer) {
+var VIMIC = (function(engine) {
     var vimic = {};
 
     engine.init();
-    renderer.init();
 
     return vimic;
-}(ENGINE, RENDERER));
+}(ENGINE));

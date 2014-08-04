@@ -29,4 +29,4 @@ gulp.task('dist', function() {
 });
 
 // Default task
-gulp.task('default', ['']);
+gulp.task('default', ['lint', 'dist']);

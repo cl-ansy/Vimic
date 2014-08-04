@@ -11,25 +11,49 @@ var INPUT = (function() {
     return input;
 }());
 
-var ENGINE = (function(input) {
-    var engine = {};
+var ENGINE = (function(renderer) {
+    var engine = {
+        init: function() {
+            console.log('engine init');
+            this._attachEvents();
+            renderer.init();
+            // input.init();
+        },
 
-    engine.init = function() {
-        console.log('engine init');
-        input.init();
+        _attachEvents: function() {
+            document.onkeydown = function(e) {
+                console.log(e);
+                switch(e.keyCode) {
+                    case 'enterCode':
+                        break;
+                }
+            };
+        }
     };
 
     return engine;
-}(INPUT));
+}(RENDERER));
 
 var MAPS = (function() {
     var maps = {};
+
+    maps.demoMap = [
+        '............',
+        '............',
+        '............',
+        '............',
+        '............'
+    ];
 
     return maps;
 }());
 
 var RENDERER = (function(maps) {
-    var renderer = {};
+    var renderer = {
+        player: '@',
+        dirt: '.',
+        wall: '#'
+    };
 
     renderer.init = function() {
         console.log('renderer init');
@@ -38,11 +62,10 @@ var RENDERER = (function(maps) {
     return renderer;
 }(MAPS));
 
-var VIMIC = (function(engine, renderer) {
+var VIMIC = (function(engine) {
     var vimic = {};
 
     engine.init();
-    renderer.init();
 
     return vimic;
-}(ENGINE, RENDERER));
+}(ENGINE));
