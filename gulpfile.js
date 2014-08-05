@@ -16,10 +16,10 @@ gulp.task('lint', function() {
 // Concat and Minify
 gulp.task('dist', function() {
     return gulp.src([
-            'Vimic/input.js',
-            'Vimic/engine.js',
-            'Vimic/maps.js',
-            'Vimic/renderer.js',
+            // 'Vimic/input.js',
+            // 'Vimic/engine.js',
+            // 'Vimic/maps.js',
+            // 'Vimic/renderer.js',
             'Vimic/vimic.js'])
         .pipe(concat('vimic.all.js'))
         .pipe(gulp.dest('dist'))

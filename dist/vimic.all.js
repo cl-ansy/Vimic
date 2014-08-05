@@ -1,26 +1,69 @@
-var INPUT = (function() {
-    var input = {};
+var CONFIG = {
+	gameEl: 'vimic-game',
+	player: '@',
+	dirt: '.',
+	wall: '#'
+};
 
-    input.init = function() {
-        console.log('input init');
-        document.onkeydown = function(e) {
-            console.log(e);
-        };
-    };
+(function() {
+	var vimic = {};
 
-    return input;
-}());
+	vimic.Maps = {
+		demoMap: [
+	        '............',
+	        '............',
+	        '............',
+	        '............',
+	        '............'
+	    ]
+	};
 
-var ENGINE = (function(renderer) {
-    var engine = {
-        init: function() {
-            console.log('engine init');
-            this._attachEvents();
-            renderer.init();
-            // input.init();
-        },
+	vimic.Renderer = {
+		init: function() {
+			this.el = document.getElementById(CONFIG.gameEl);
+			this.canvas = document.createElement("canvas");
+			this.el.innerHTML = '';
+			this.el.appendChild(this.canvas);
 
-        _attachEvents: function() {
+			this.render();
+
+			console.log(this);
+			console.log(this.el);
+			console.log(vimic.Maps.demoMap);
+		},
+
+		render: function() {
+			console.log('rendering');
+		},
+
+		createTile: function(char, r, g, b) {
+			this.char = char || '.';
+			this.r = r || 0;
+			this.g = g || 0;
+			this.b = b || 0;
+
+			return {
+				getChar: function() {
+					return this.char;
+				},
+				setChar: function(char) {
+					this.char = char;
+				},
+				setColor: function(r, g, b) {
+					this.r = r;
+					this.g = g;
+					this.b = b;
+				}
+			};
+		}
+	};
+
+	vimic.Engine = {
+		init: function() {
+			this.attachEvents();
+		},
+
+		attachEvents: function() {
             document.onkeydown = function(e) {
                 console.log(e);
                 switch(e.keyCode) {
@@ -28,44 +71,10 @@ var ENGINE = (function(renderer) {
                         break;
                 }
             };
-        }
-    };
+		}
+	};
 
-    return engine;
-}(RENDERER));
+	vimic.Engine.init();
+	vimic.Renderer.init();
 
-var MAPS = (function() {
-    var maps = {};
-
-    maps.demoMap = [
-        '............',
-        '............',
-        '............',
-        '............',
-        '............'
-    ];
-
-    return maps;
 }());
-
-var RENDERER = (function(maps) {
-    var renderer = {
-        player: '@',
-        dirt: '.',
-        wall: '#'
-    };
-
-    renderer.init = function() {
-        console.log('renderer init');
-    };
-
-    return renderer;
-}(MAPS));
-
-var VIMIC = (function(engine) {
-    var vimic = {};
-
-    engine.init();
-
-    return vimic;
-}(ENGINE));
