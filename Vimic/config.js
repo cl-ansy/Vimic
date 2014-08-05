@@ -1,7 +1,8 @@
-var VIMIC_CONFIG = {
+var CONFIG = {
     gameElId: 'vimic-game',
-    gameWidth: 300,
-    gameHeight: 100,
+    // Recommended ratio - 1:1
+    gameWidth: 250,
+    gameHeight: 250,
     player: '@',
     dirt: '.',
     wall: '#'

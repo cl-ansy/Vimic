@@ -1,23 +1,35 @@
-var VIMIC_CONFIG = {
-    gameElId: 'vimic-game',
-    gameWidth: 300,
-    gameHeight: 100,
-    player: '@',
-    dirt: '.',
-    wall: '#'
-};
-(function(config) {
-    var vimic = {};
-
-    vimic.Maps = {
-        demoMap: [
+var MAPS = {
+    demoMap: {
+        map: [
             '###############',
             '#.#....#....#.#',
             '#.#.#..#..#.#.#',
             '#...#.....#...#',
-            '###############'
+            '#######.#######',
+            '#..##.....##..#',
+            '##....###....##',
+            '#..#########..#',
+            '#.#############',
+            '#.####....#####',
+            '#.####....#####',
+            '#.######.######',
+            '#.######.######',
+            '#........######',
+            '###############',
         ]
-    };
+    }
+};
+var CONFIG = {
+    gameElId: 'vimic-game',
+    // Recommended ratio - 1:1
+    gameWidth: 250,
+    gameHeight: 250,
+    player: '@',
+    dirt: '.',
+    wall: '#'
+};
+(function(config, maps) {
+    var vimic = {};
 
     vimic.Tile = function(char, r, g, b) {
         "use strict";
@@ -25,20 +37,13 @@ var VIMIC_CONFIG = {
         this.r = r;
         this.g = g;
         this.b = b;
-
-        return {
-            getChar: function() {
-                return char;
-            },
-            setChar: function(char) {
-                this.char = char;
-            },
-            setColor: function(r, g, b) {
-                this.r = r;
-                this.g = g;
-                this.b = b;
-            }
-        };
+    };
+    vimic.Tile.prototype.getChar = function() { return this.char; };
+    vimic.Tile.prototype.setChar = function(char) { this.char = char; };
+    vimic.Tile.prototype.setColor = function(r, g, b) {
+        this.r = r;
+        this.g = g;
+        this.b = b;
     };
 
     vimic.Renderer = {
@@ -55,7 +60,7 @@ var VIMIC_CONFIG = {
 
         render: function() {
             var ctx = this.canvas.getContext('2d'),
-                map = this.createMap(vimic.Maps.demoMap),
+                map = this.createMap(maps.demoMap.map),
                 xSize = this.canvas.width / map.length,
                 xPos = xSize / 2,
                 ySize = this.canvas.height / map[0].length,
@@ -102,4 +107,4 @@ var VIMIC_CONFIG = {
     vimic.Engine.init();
     vimic.Renderer.init();
 
-}(VIMIC_CONFIG));
+}(CONFIG, MAPS));

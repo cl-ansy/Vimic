@@ -16,6 +16,7 @@ gulp.task('lint', function() {
 // Concat and Minify
 gulp.task('dist', function() {
     return gulp.src([
+            'Vimic/maps.js',
             'Vimic/config.js',
             'Vimic/vimic.js'])
         .pipe(concat('vimic.all.js'))

@@ -1,15 +1,5 @@
-(function(config) {
+(function(config, maps) {
     var vimic = {};
-
-    vimic.Maps = {
-        demoMap: [
-            '###############',
-            '#.#....#....#.#',
-            '#.#.#..#..#.#.#',
-            '#...#.....#...#',
-            '###############'
-        ]
-    };
 
     vimic.Tile = function(char, r, g, b) {
         "use strict";
@@ -17,20 +7,13 @@
         this.r = r;
         this.g = g;
         this.b = b;
-
-        return {
-            getChar: function() {
-                return char;
-            },
-            setChar: function(char) {
-                this.char = char;
-            },
-            setColor: function(r, g, b) {
-                this.r = r;
-                this.g = g;
-                this.b = b;
-            }
-        };
+    };
+    vimic.Tile.prototype.getChar = function() { return this.char; };
+    vimic.Tile.prototype.setChar = function(char) { this.char = char; };
+    vimic.Tile.prototype.setColor = function(r, g, b) {
+        this.r = r;
+        this.g = g;
+        this.b = b;
     };
 
     vimic.Renderer = {
@@ -47,7 +30,7 @@
 
         render: function() {
             var ctx = this.canvas.getContext('2d'),
-                map = this.createMap(vimic.Maps.demoMap),
+                map = this.createMap(maps.demoMap.map),
                 xSize = this.canvas.width / map.length,
                 xPos = xSize / 2,
                 ySize = this.canvas.height / map[0].length,
@@ -94,4 +77,4 @@
     vimic.Engine.init();
     vimic.Renderer.init();
 
-}(VIMIC_CONFIG));
+}(CONFIG, MAPS));
