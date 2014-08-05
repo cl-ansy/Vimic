@@ -1,15 +1,15 @@
 (function(config) {
-	var vimic = {};
+    var vimic = {};
 
-	vimic.Maps = {
-		demoMap: [
-	        '###############',
-	        '#.#....#....#.#',
-	        '#.#.#..#..#.#.#',
-	        '#...#.....#...#',
-	        '###############'
-	    ]
-	};
+    vimic.Maps = {
+        demoMap: [
+            '###############',
+            '#.#....#....#.#',
+            '#.#.#..#..#.#.#',
+            '#...#.....#...#',
+            '###############'
+        ]
+    };
 
     vimic.Tile = function(char, r, g, b) {
         "use strict";
@@ -33,14 +33,14 @@
         };
     };
 
-	vimic.Renderer = {
-		init: function() {
-			this.el = document.getElementById(config.gameElId);
-			this.canvas = document.createElement("canvas");
+    vimic.Renderer = {
+        init: function() {
+            this.el = document.getElementById(config.gameElId);
+            this.canvas = document.createElement("canvas");
             this.canvas.width = config.gameWidth;
             this.canvas.height = config.gameHeight;
-			this.el.innerHTML = '';
-			this.el.appendChild(this.canvas);
+            this.el.innerHTML = '';
+            this.el.appendChild(this.canvas);
 
             this.render();
         },
@@ -58,7 +58,7 @@
                     ctx.fillText(map[x][y].getChar(), x * xSize + xPos, y * ySize + yPos);
                 }
             }
-		},
+        },
 
         createMap: function(mapArray) {
             var width = mapArray[0].length,
@@ -74,24 +74,24 @@
             console.log(map);
             return map;
         }
-	};
+    };
 
-	vimic.Engine = {
-		init: function() {
-			this.attachEvents();
-		},
+    vimic.Engine = {
+        init: function() {
+            this.attachEvents();
+        },
 
-		attachEvents: function() {
+        attachEvents: function() {
             document.onkeydown = function(e) {
                 switch(e.keyCode) {
                     case 'enterCode':
                         break;
                 }
             };
-		}
-	};
+        }
+    };
 
-	vimic.Engine.init();
-	vimic.Renderer.init();
+    vimic.Engine.init();
+    vimic.Renderer.init();
 
 }(VIMIC_CONFIG));
